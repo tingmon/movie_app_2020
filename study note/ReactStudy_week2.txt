@@ -1,0 +1,141 @@
+https://velopert.com/reactjs-tutorials
+
+2.0
+@run the server - npm start
+index.js is not html, The function App() in App.js returns html
+React is consisted of components, function or class that returns html <App /> <Detail /> this combination is called jsx
+html + javascript = jsx 자바스크립트처럼 펑션, 클래스 만들어서 작동하는데 안에는 html코드 입력해서 리턴함
+
+@make component
+1. always type 'import React from "react";' on the first line to use React
+2. write function or class and return html
+3. type 'export default function or class name' on the last line of component
+import components in App.js, not index.js. index.js only calls App.js
+
+2.1
+@pass data to children component
+<Food fav="kimchi" /> pass property 'fav' which has value 'kimchi' to 'Food' component
+Food component will receive the information in 'props' argument 
+
+function Food(props){
+	console.log(props);
+}
+result: Object -> fav: "kimchi" , 'props' is object
+
+function Food({fav}){
+	console.log({fav});    -> this components can re-uasble by sending different data kimchi, pizza, hamburger...
+}
+result: kimchi
+
+2.2 
+@ add dynamic data into website
+simulate website received array of data from API
+render this javascript list object 
+const FoodILike = [
+  {
+    name: 'kimchi',
+    image: 'asdf'
+  },
+  {
+    name: 'hambuger',
+    image: 'asdf'
+  },
+  {
+    name: 'pizza',
+    image: 'asdf'
+  },
+  {
+    name: 'kimbap',
+    image: 'asdf'
+  },  {
+    name: 'ramen',
+    image: 'asdf'
+  }
+]
+
+@definitions of foreach() and map() on MDN:
+-forEach() — executes a provided function once for each array element.
+-map() — creates a new array with the results of calling a provided function on every element in the calling array.
+
+What exactly does this mean?
+foreach: doesn't return anything. simply calls a provided function for each element in the array. 
+	calling array's element value change.
+map: does same as foreach but the difference is it returns a new array of the same size. 
+
+let arr = [1, 2, 3, 4, 5];
+
+arr.forEach((num, index) => {
+    console.log(index);
+    return arr[index] = num * 2;
+});
+console.log(arr);
+
+let arr1 = [1, 2, 3, 4, 5];
+
+const doubled = arr1.map(num => {
+    return num * 2;
+});
+console.log(doubled);
+console.log(arr1);
+
+{foodILike.map(food => <Food name={food.name} image={food.image}/>)} -> food is object 
+
+2.3
+@practice map
+component have to has uniqueness by 'key' property. it is React internal use just to distiguish inside react.
+
+function renderFood(food){
+  return <Food name={food.name} image={food.image} />
+}
+
+function App(){
+  return (
+    <div>
+      {FoodILike.map(renderFood)} // passing each object
+    </div>
+  )
+}  
+
+2.4
+@check props from father components
+npm install prop-types -> to check props is valid data type that I want
+import PropTypes from 'prop-types'
+
+Movie.propTypes = {                         
+    id: PropTypes.number.isRequired,
+    title: PropTypes.string.isRequired,
+    summary: PropTypes.string.isRequired,
+    poster: PropTypes.string.isRequired,
+    year: PropTypes.number.isRequired,
+    genres: PropTypes.arrayOf(PropTypes.string).isRequired -> array of string is required if not, shows error
+}
+
+3.0 
+@why we use class component? -> to use state that can contain mutable properties
+state = {
+	count: 0
+};
+
+add = () => {
+	this.setState(current => ({ count: current.count + 1});   -> this is recommended practice
+}
+minus = () => {
+	this.setState({ count: this.state.count - 1});
+}
+
+everytime the setState fucntion is called, render method will re-render the page with changed state property
+
+3.2
+@class component has life cycle methods
+componentDidMount(): when component is mounted on page *
+shouldComponentUpdate(): when data is updated and will render 
+componentDidUpdate(): when data is updated and rendered *
+componentWillUnmount(): when component will unmount from the page ex) go to different page
+
+3.3
+
+
+to change values in the state, have to call setState() function to refresh the page.
+
+클래스 사용할 때 this를 반드시 써야하나?
+onClick = this.add 와 this.add()의 차이

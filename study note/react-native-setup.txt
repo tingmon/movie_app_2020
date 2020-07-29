@@ -1,0 +1,21 @@
+--set up react native app
+
+1. npm install -g expo-cli
+
+2. expo init weatherman -> blank
+cd weatherman
+npm start
+
+3. make a new repository in git hub
+git remote add origin https://github.com/tingmon/weatherman
+git pull origin master --allow-unrelated-histories
+
+4. login expo on your phone tingmon 132435qq
+
+5. on your pc console(vscode console) enter
+expo login
+expo start
+
+--on simulator
+7. simulate manually -> ctrl + r
+8. developer menu -> crtl + d or m

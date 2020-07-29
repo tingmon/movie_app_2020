@@ -1,0 +1,22 @@
+react hooks => allow to have state in functional component
+means we don't need to use class component(componentDidMount, render) everytime 
+can do functional style programming
+
+import React, {Component, useState } from "react" -> 'useState' is added to use hooks
+useState returns an array
+const [count, setCount] = useState(0); -> first element is value(count) and we assigned initial value as 0
+<button onClick={() => setCount(count + 1)}>Increment</button> -> second element
+
+import React, { useState, useEffect } from "react";
+useEffect is similar with componentDidMount or componentUpdate
+
+normal code
+useEffect(() => {
+	code what are you going to do (ex fetching url)
+})
+
+but, if you want to use it only as componentDidMount, code like this 
+useEffect(() => {
+	code what are you going to do (ex fetching url) when component did mount
+}, [])
+

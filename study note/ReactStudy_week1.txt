@@ -1,0 +1,35 @@
+<What is react?>
+React is a JavaScript library for building user interfaces.
+React is used to build single page applications.
+React allows us to create reusable UI components.
+
+single page applications(SPA) (https://www.youtube.com/watch?v=PyX2SEsfpUY)
+multi page applications(MPA)
+
+<Example>
+1. Create React App
+	npm install -g create-react-app
+	npx create-react-app myfirstreact
+2. Run the React Application
+	cd myfirstreact
+	npm start
+
+NPM - Node Package Manager
+NPX - NPM package runner
+YARN - package manager like npm, Yarn is faster than npm b/c yarn is installing them concurrently
+
+<Put your app to github>
+git init
+git remote add origin https://github.com/hyp0126/myfirstreact
+git add .
+git commit -m "#1.0 Creating .."
+git push origin master
+
+Pro Git e-book: https://git-scm.com/book/ko/v2
+GIT1 https://opentutorials.org/module/3733
+GIT2 https://opentutorials.org/module/3762
+GIT3 https://opentutorials.org/module/3801
+
+<Visual Studio Extension for git>
+Git History
+GitLens

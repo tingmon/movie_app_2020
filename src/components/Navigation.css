@@ -1,0 +1,9 @@
+.navigation{
+
+}
+.navigation a{
+    padding: 10px;
+    float: left;
+    display: inline-block;
+    background-color: hotpink;
+}

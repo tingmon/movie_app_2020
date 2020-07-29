@@ -1,0 +1,96 @@
+6.0 Getting ready for the Router
+react-router-dom: package of navigation for react
+설치방법 npm install react-router-dom
+
+organize files into folder
+clear App.js
+components folder => operate action in the page => Movie.js render movie information, Navigation.js render navigation tab 
+routes folder => basic pages that will show when user select navigation element.
+
+6.1 Building the Router
+1. add new import line in App.js
+import { HashRouter, Route } from "react-router-dom";
+
+2. make a Router in function App()
+<HashRouter></HashRouter>
+
+3. inside the Router make a Route, import components you are going to use
+
+(props in Route => path: set url address, component: set action when moved, exact: render when url is exactly same with the path)
+
+<HashRouter>  // Router will read the url and do the action.
+	<Route path="/" exact={true} component={Home}  //  add 'exact' prop in home page to avoid render two pages in one screen
+	<Route path="/about" component={About}  // when url address is '/about', run 'About' component.
+</HashRouter>
+
+6.2 Building the Navigation
+1. make and write Navigation.js
+don't use html anchor tag => it refreshes page everytime you click and doesn't navigate page to page.
+import { Link } from "react-router-dom";
+
+function Navigation() {
+	return(
+		<div>
+			<Link to="/">Home</Link>
+			<Link to="/about">About</Link>
+		</div>
+	);
+}
+
+2. import Navgation component and call in App.js
+<HashRouter>
+	<Navigation />
+	<Route path="/" exact={true} component={Home}
+	<Route path="/about" component={About}
+</HashRouter>
+
+3. can not use 'Link' if <Navigation /> code is outside of <HashRouter></HashRouter> , don't need to put everything inside the router
+
+6.3 Sharing props between Routes
+1. every Route inside the Router has 'route props'
+        <Link to={{
+            pathname: "/about",
+            state:{
+                fromNavgation: true
+            }
+        }}>About</Link>
+ 'Link to' send an object to the "/about" page. it specifies route props ex) pathname, state... in "/about" page
+
+2.실제 디테일페이지 가보기
+
+6.4 Redirecting
+1. using route props 
+    
+componentDidMount() {
+        const { location, history } = this.props;
+        console.log(this.props);
+        if(location.state === undefined){
+            history.push('/');  // history.push('url') will move page to given url
+        }
+    }
+
+    
+render(){
+        const { location } = this.props;
+        if (location.state){                              // use if condtion statement in case of location.state is undefined.
+            return(
+                <div className="detail_container">
+                    <div>
+                        <h1>You have trapped in my fishing program!</h1>
+                        <h3>Extracting your banking information...</h3>
+                    </div>
+                    <div className="detail_info">
+                        <img src={location.state.poster} alt={location.state.title}></img><br></br>
+                        <span>Title: {location.state.title}</span><br></br>
+                        <span>Year: {location.state.year}</span><br></br>
+                        <ul>{location.state.genres.map((genre, index) => <li key={index}>{genre}</li>)}</ul>
+                        <span>{location.state.summary}</span>
+                    </div>
+                </div>
+            )
+        }
+        else{
+            return null; //if it has no state props, return null and componentDidMount() will run
+        }
+    }
+
